@@ -11,4 +11,18 @@ horário e local que precisem ou que estão oferecendo carona e os usuários que
  * Gabriel Lucas Freire Martins Silva - PO
  * Lucas Leandro - Ux Designer
  * Patricia Silva - Dev Full Stack
-  
+# Histórias do Usuário:  
+
+Usuário:
+ * Fazer cadastro
+ * Validar matrícula
+
+Usuário enquanto solicitante:
+ * Solicitar nova carona 
+ * Solicitar participação em carona listada
+ * Enviar mensagem ao ofertante
+ 
+Usuário enquanto ofertante:
+ * Oferecer carona
+ * Aceitar participação do solicitante
+ * Enviar mensagem ao solicitante
