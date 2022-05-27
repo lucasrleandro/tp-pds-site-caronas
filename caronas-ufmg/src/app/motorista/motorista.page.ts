@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MotoristaPage implements OnInit {
 
+  listaCaronas = [{
+    _id: 0,
+    data: '',
+    rota: '',
+    passageiros: 0
+  }];
+
   constructor() { }
 
   ngOnInit() {

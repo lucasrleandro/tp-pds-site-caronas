@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/motorista"> </ion-back-button>
+    </ion-buttons>
+
+    <ion-title> Detalhes da carona </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <div class="border-bottom mt-16 pb-8">
+      <h6 class="color-gray-dark">Detalhes</h6>
+    </div>
+
+    <ion-row>
+      <ion-col size="3" class="d-flex flex-column">
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Origem</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Destino</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Rota</ion-label
+        >
+
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Horário</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Vagas</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Veículo</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8 color-gray-light-1"
+          >Valor</ion-label
+        >
+      </ion-col>
+      <ion-col class="d-flex flex-column">
+        <ion-label class="label-caption-1 mt-8"
+          >Centro, Belo Horizonte</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8"
+          >Instituto de Ciências Exatas...</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8"
+          >Afonso Pena, Antônio Carlos</ion-label
+        >
+        <ion-label class="label-caption-1 mt-8">16:00</ion-label>
+
+        <ion-label class="label-caption-1 mt-8">4</ion-label>
+
+        <ion-label class="label-caption-1 mt-8">Fiat Argo prata</ion-label>
+        <ion-label class="label-caption-1 mt-8">R$ 5,00</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <div class="border-bottom mt-16 pb-8">
+      <h6 class="color-gray-dark">Passageiros (0/4)</h6>
+    </div>
+
+    <div class="div-card active p-16 mt-16">
+      <ion-row>
+        <ion-col size="3" class="px-0 d-flex justify-content-center">
+          <ion-icon
+            name="person-circle"
+            class="icone-usuario"
+            color="primary"
+          ></ion-icon>
+        </ion-col>
+        <ion-col class="d-flex flex-column justify-content-around">
+          <ion-label class="label-body-2 color-gray-dark"
+            >Amanda Xavier</ion-label
+          >
+          <div class="stars"></div>
+
+          <div class="d-flex justify-content-between">
+            <ion-label class="label-caption-1 color-primary">Aceitar</ion-label>
+            <ion-label class="label-caption-1 color-error">Recusar</ion-label>
+            <ion-label class="label-caption-1">Mensagem</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="div-card p-16 mt-16">
+      <ion-row>
+        <ion-col size="3" class="px-0 d-flex justify-content-center">
+          <ion-icon
+            name="person-circle"
+            class="icone-usuario"
+            color="primary"
+          ></ion-icon>
+        </ion-col>
+        <ion-col class="d-flex flex-column justify-content-around">
+          <ion-label class="label-body-2 color-gray-dark"
+            >Gabriel Martins</ion-label
+          >
+          <div class="stars"></div>
+
+          <div class="d-flex justify-content-between">
+            <ion-label class="label-caption-1 color-primary"
+              >Confirmado</ion-label
+            >
+            <ion-label class="label-caption-1">Mensagem</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

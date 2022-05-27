@@ -31,7 +31,7 @@ export class PerfilPage implements OnInit {
   }
 
   formValid() {
-    return false;
+    return this.formProfile.valid && (this.formProfile.get('passageiro').value || this.formProfile.get('motorista').value)
   }
 
   save() {

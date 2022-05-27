@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/motorista"> </ion-back-button>
+    </ion-buttons>
+
+    <ion-title> Oferecer carona </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <form [formGroup]="formCarona" (ngSubmit)="save()" class="mt-16">
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Origem </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="text"
+              formControlName="origem"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Destino </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="text"
+              formControlName="destino"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Data </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="text"
+              formControlName="data"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Horário </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="text"
+              formControlName="horario"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Vagas </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="number"
+              formControlName="vagas"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Veículo </ion-label>
+            <ion-input
+              required="true"
+              maxlength="256"
+              type="text"
+              formControlName="veiculo"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="my-8">
+        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Preço </ion-label>
+            <ion-input
+              required="true"
+              type="number"
+              formControlName="preco"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="d-flex justify-content-center mt-32">
+        <ion-button
+          [disabled]="!formValid()"
+          type="submit"
+          class="action-button w-100"
+        >
+          Salvar
+        </ion-button>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

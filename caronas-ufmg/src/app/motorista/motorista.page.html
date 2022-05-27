@@ -1,7 +1,51 @@
 <ion-header>
   <ion-toolbar mode="ios">
-    <ion-title>Meu carro</ion-title>
+    <ion-title> Meu carro </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> <ion-grid class="p-24"> </ion-grid></ion-content>
+<ion-content>
+  <ion-grid class="p-24">
+    <div *ngIf="!listaCaronas" class="w-100 d-flex justify-content-center">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div *ngIf="listaCaronas">
+      <div
+        class="div-card p-20"
+        *ngFor="let carona of listaCaronas"
+        routerLink="detalhe-carona"
+      >
+        <ion-row>
+          <ion-col size="4" class="d-flex flex-column p-0">
+            <ion-label class="label-caption-1 color-gray-light-1"
+              >Data</ion-label
+            >
+            <ion-label class="label-caption-1 color-gray-light-1"
+              >Rota</ion-label
+            >
+            <ion-label class="label-caption-1 color-gray-light-1"
+              >Passageiros</ion-label
+            >
+          </ion-col>
+          <ion-col class="d-flex flex-column p-0">
+            <ion-label class="label-caption-1">Terças e Quintas</ion-label>
+            <ion-label class="label-caption-1">Centro > ICEX UFMG</ion-label>
+            <ion-label class="label-caption-1">Nenhum</ion-label>
+          </ion-col>
+          <ion-col
+            size="1"
+            class="d-flex align-items-center justify-content-center p-0"
+          >
+            <ion-icon name="chevron-forward" color="primary"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div> </ion-grid
+></ion-content>
+
+<ion-footer class="px-24 py-16">
+  <ion-button class="action-button" routerLink="nova-carona">
+    Oferecer carona
+  </ion-button>
+</ion-footer>

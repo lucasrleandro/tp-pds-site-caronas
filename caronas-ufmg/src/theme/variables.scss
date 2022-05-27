@@ -137,16 +137,20 @@ h6 {
   font-size: 1.2rem;
 }
 
+.icone-usuario {
+  font-size: 6rem;
+}
+
 // action button -> Poppins Semibold 1.6rem
 // clear button -> Poppins Medium 1.6rem
 
 :root {
   /** fonts **/
 
-  --ion-default-font: 'Poppins' !important;
+  --ion-default-font: "Poppins" !important;
 
   /** primary **/
-  --ion-color-primary: #67BDBD;
+  --ion-color-primary: #67bdbd;
   --ion-color-primary-rgb: 130, 211, 178;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;

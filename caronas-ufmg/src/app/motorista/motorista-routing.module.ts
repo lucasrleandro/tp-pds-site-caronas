@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: MotoristaPage
+  },
+  {
+    path: 'nova-carona',
+    loadChildren: () => import('./nova-carona/nova-carona.module').then( m => m.NovaCaronaPageModule)
+  },
+  {
+    path: 'detalhe-carona',
+    loadChildren: () => import('./detalhe-carona/detalhe-carona.module').then( m => m.DetalheCaronaPageModule)
   }
 ];
 

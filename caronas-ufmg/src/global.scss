@@ -1,24 +1,24 @@
 // http://ionicframework.com/docs/theming/
-@import '~@ionic/angular/css/core.css';
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
-@import '~@ionic/angular/css/display.css';
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
-@import './theme/variables.scss';
-@import './theme/margins.scss';
-@import './theme/paddings.scss';
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "./theme/variables.scss";
+@import "./theme/margins.scss";
+@import "./theme/paddings.scss";
 
 // POPPINS
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
   outline: none;
-  font-family: 'Poppins' !important;
+  font-family: "Poppins" !important;
 }
 
 :root {
@@ -313,7 +313,7 @@ ion-list {
 
 .pac-item {
   cursor: default;
-  font-family: 'Futura Bk BT';
+  font-family: "Futura Bk BT";
   padding: 4vw 3vw;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -465,6 +465,10 @@ ion-tab-button {
   background-color: white !important;
   border-radius: 16px;
   --border-radius: 16px;
+
+  &.active {
+    border: 1px solid var(--ion-color-primary);
+  }
 }
 
 .empty-card {
@@ -893,6 +897,10 @@ ion-spinner {
 
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
 }
 
 .close-modal {
