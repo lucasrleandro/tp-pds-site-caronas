@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "caronas-ufmg",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

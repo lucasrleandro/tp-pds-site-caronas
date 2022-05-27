@@ -1,0 +1,27 @@
+@import "../../theme/variables.scss";
+
+.camera-edit {
+  position: absolute;
+  left: 11vw;
+  bottom: 0vw;
+  background: white;
+  border-radius: 17px;
+  font-size: 5vw !important;
+  box-shadow: $card-box-shadow;
+  padding: 0.5vw;
+  color: $color-gray-default;
+}
+
+
+.card-avatar {
+  position: relative;
+
+  ion-icon {
+    font-size: 18vw;
+    margin-left: 2px;
+  }
+}
+
+.label-caption-1 {
+  font-weight: bold;
+}

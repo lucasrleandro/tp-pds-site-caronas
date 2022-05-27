@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title> Perfil </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-24">
+    <div *ngIf="!user" class="w-100 d-flex justify-content-center">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div *ngIf="user">
+      <div class="w-100 d-flex mb-32 justify-content-center">
+        <div class="card-avatar">
+     
+          <ion-icon color="primary" name="person-circle"></ion-icon>
+
+
+        </div>
+      </div>
+
+      <h6 class="color-gray-dark">Dados pessoais</h6>
+
+      <form [formGroup]="formProfile" (ngSubmit)="save()" class="mt-16">
+        <ion-row class="my-8">
+          <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> Nome </ion-label>
+              <ion-input
+                required="true"
+                debounce="500"
+                maxlength="256"
+                type="text"
+                formControlName="nome"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="my-8">
+          <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> E-mail </ion-label>
+              <ion-input
+                maxlength="256"
+                type="email"
+                formControlName="email"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="my-8">
+          <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> Matrícula </ion-label>
+              <ion-input
+                formControlName="matricula"
+                type="text"
+                maxlength="10"
+                inputmode="numeric"
+              >
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-item class="mt-24 ion-no-padding" lines="none">
+          <div class="d-flex flex-column">
+            <ion-label class="color-gray-dark label-body-2">
+              Passageiro</ion-label
+            >
+            <ion-label
+              class="color-gray-default label-caption-1 mt-4"
+              style="white-space: normal"
+            >
+              Desejo buscar caronas
+            </ion-label>
+          </div>
+
+          <ion-checkbox slot="start" formControlName="passageiro"></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="mt-16 ion-no-padding" lines="none">
+          <div class="d-flex flex-column">
+            <ion-label class="color-gray-dark label-body-2">
+              Motorista</ion-label
+            >
+            <ion-label
+              class="color-gray-default label-caption-1 mt-4"
+              style="white-space: normal"
+            >
+              Desejo oferecer caronas
+            </ion-label>
+          </div>
+
+          <ion-checkbox slot="start" formControlName="motorista"></ion-checkbox>
+        </ion-item>
+
+        <ion-row class="d-flex justify-content-center mt-32">
+          <ion-button
+            [disabled]="!formValid()"
+            type="submit"
+            class="action-button w-100"
+          >
+            Salvar
+          </ion-button>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+</ion-content>
