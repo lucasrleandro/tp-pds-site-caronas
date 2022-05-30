@@ -1,0 +1,67 @@
+<ion-content>
+  <div class="logo-caronas mt-56">
+    <ion-img src="../../../assets/logo.png"></ion-img>
+  </div>
+  <ion-grid class="d-flex justify-content-center p-24">
+    <form [formGroup]="formLogin" class="w-100 mt-40" (ngSubmit)="login()">
+      <ion-row>
+        <ion-col class="ion-no-padding" size-sm="6" offset-sm="3">
+          <ion-item class="ion-no-padding" mode="md">
+            <ion-label position="floating"> Matrícula </ion-label>
+            <ion-input
+              maxlength="10"
+              type="number"
+              formControlName="matricula"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating"> Senha </ion-label>
+
+            <ion-input
+              (keyup.enter)="login()"
+              type="{{ mostrarSenha ? 'text':'password'  }}"
+              formControlName="senha"
+              enterkeyhint="go"
+            >
+            </ion-input>
+
+            <ion-icon
+              name="{{ mostrarSenha ? 'eye-off':'eye'  }}"
+              (click)="mostrarSenha = !mostrarSenha"
+              class="eye-password"
+              slot="end"
+            ></ion-icon>
+          </ion-item>
+
+          <div class="mt-8">
+            <ion-label class="label-body-2 color-primary"
+              ><b>Esqueci minha senha</b></ion-label
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-button
+        type="submit"
+        [disabled]="!formLogin.valid"
+        class="action-button mt-40"
+      >
+        <b>Entrar</b>
+      </ion-button>
+    </form>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="px-24 py-16">
+  <div class="w-100 ion-text-center mt-40" routerLink="cadastro">
+    <ion-label class="label-body-2 w-100">
+      Ainda não tem uma conta? <br />
+      <ion-text color="primary"><b>Cadastre-se</b></ion-text>
+    </ion-label>
+  </div>
+</ion-footer>
