@@ -9,15 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'passageiro',
-        loadChildren: () => import('../passageiro/passageiro.module').then(m => m.PassageiroPageModule)
+        loadChildren: () => import('./passageiro/passageiro.module').then(m => m.PassageiroPageModule)
       },
       {
         path: 'motorista',
-        loadChildren: () => import('../motorista/motorista.module').then(m => m.MotoristaPageModule)
+        loadChildren: () => import('./motorista/motorista.module').then(m => m.MotoristaPageModule)
       },
       {
         path: 'perfil',
-        loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
+        loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
       },
       {
         path: '',
