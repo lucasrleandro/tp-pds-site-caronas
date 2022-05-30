@@ -10,6 +10,24 @@
 
 <ion-content>
   <ion-grid class="p-24">
+    <ion-row>
+      <ion-col size="2" class="px-0 d-flex justify-content-center">
+        <ion-icon
+          name="person-circle"
+          class="icone-usuario"
+          color="primary"
+        ></ion-icon>
+      </ion-col>
+      <ion-col class="d-flex flex-column justify-content-center pl-16">
+        <ion-label class="label-body-2 color-gray-dark"
+          ><b>Gabriel Martins</b></ion-label
+        >
+
+        <app-nota-estrelas [stars]="4"></app-nota-estrelas>
+
+      </ion-col>
+    </ion-row>
+
     <div class="border-bottom mt-16 pb-8">
       <h6 class="color-gray-dark">Detalhes</h6>
     </div>
@@ -59,56 +77,31 @@
     </ion-row>
 
     <div class="border-bottom mt-16 pb-8">
-      <h6 class="color-gray-dark">Passageiros (0/4)</h6>
+      <h6 class="color-gray-dark">Solicitação</h6>
     </div>
 
-    <div class="div-card active p-16 mt-16">
-      <ion-row>
-        <ion-col size="3" class="px-0 d-flex justify-content-center">
-          <ion-icon
-            name="person-circle"
-            class="icone-usuario"
-            color="primary"
-          ></ion-icon>
-        </ion-col>
-        <ion-col class="d-flex flex-column justify-content-around">
-          <ion-label class="label-body-2 color-gray-dark"
-            ><b>Amanda Xavier</b></ion-label
-          >
-          <app-nota-estrelas [stars]="4"></app-nota-estrelas>
+    <ion-row *ngIf="!solicitado">
+      <ion-col>
+        <ion-button (click)="solicitar()" class="action-button mt-16">
+          Quero essa carona!
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-          <div class="d-flex justify-content-between mt-16">
-            <ion-label class="label-caption-1 color-primary">Aceitar</ion-label>
-            <ion-label class="label-caption-1 color-error">Recusar</ion-label>
-            <ion-label class="label-caption-1">Mensagem</ion-label>
-          </div>
-        </ion-col>
-      </ion-row>
-    </div>
+    <ion-row *ngIf="solicitado">
+      <ion-col>
+        <ion-label class="label-body-2"
+          >Aguardando confirmação de Lucas</ion-label
+        >
+      </ion-col>
+    </ion-row>
 
-    <div class="div-card p-16 mt-16">
-      <ion-row>
-        <ion-col size="3" class="px-0 d-flex justify-content-center">
-          <ion-icon
-            name="person-circle"
-            class="icone-usuario"
-            color="primary"
-          ></ion-icon>
-        </ion-col>
-        <ion-col class="d-flex flex-column justify-content-around">
-          <ion-label class="label-body-2 color-gray-dark"
-            ><b>Gabriel Martins</b></ion-label
-          >
-          <app-nota-estrelas [stars]="4"></app-nota-estrelas>
-
-          <div class="d-flex justify-content-between mt-16">
-            <ion-label class="label-caption-1 color-primary"
-              >Confirmado</ion-label
-            >
-            <ion-label class="label-caption-1">Mensagem</ion-label>
-          </div>
-        </ion-col>
-      </ion-row>
-    </div>
+    <ion-row *ngIf="solicitado">
+      <ion-col>
+        <ion-button (click)="cancelar()" color="danger" class="action-button button-clear mt-16">
+          Cancelar
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

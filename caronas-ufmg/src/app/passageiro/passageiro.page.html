@@ -1,7 +1,50 @@
 <ion-header>
   <ion-toolbar mode="ios">
-    <ion-title>Caronas disponíveis</ion-title>
+    <ion-title>Caronas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> <ion-grid class="p-24"> </ion-grid></ion-content>
+<ion-content>
+  <ion-grid class="p-24">
+    <div class="border-bottom mt-16 pb-8">
+      <h6 class="color-gray-dark">Caronas disponíveis</h6>
+    </div>
+
+    <div *ngIf="listaCaronas">
+      <div
+        class="div-card p-20 mt-16"
+        *ngFor="let carona of listaCaronas"
+        routerLink="detalhe-carona-passageiro"
+      >
+        <ion-row>
+          <ion-col size="3" class="px-0 d-flex justify-content-center">
+            <ion-icon
+              name="person-circle"
+              class="icone-usuario"
+              color="primary"
+            ></ion-icon>
+          </ion-col>
+          <ion-col class="d-flex flex-column p-0 justify-content-around">
+            <ion-label class="label-body-2 color-gray-dark"
+              ><b>Gabriel Martins</b></ion-label
+            >
+            <ion-label class="label-caption-1">Centro > ICEX UFMG</ion-label>
+
+            <div class="d-flex">
+              <ion-label class="label-caption-1 mr-16">16:00</ion-label>
+
+              <ion-label class="label-caption-1 mr-16">4 vagas</ion-label>
+
+              <ion-label class="label-caption-1">R$ 5,00</ion-label>
+            </div>
+          </ion-col>
+          <ion-col
+            size="1"
+            class="d-flex align-items-center justify-content-center p-0"
+          >
+            <ion-icon name="chevron-forward" color="primary"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div> </ion-grid
+></ion-content>

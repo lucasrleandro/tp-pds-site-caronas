@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: PassageiroPage
+  },
+  {
+    path: 'detalhe-carona-passageiro',
+    loadChildren: () => import('./detalhe-carona-passageiro/detalhe-carona-passageiro.module').then( m => m.DetalheCaronaPassageiroPageModule)
   }
 ];
 

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { DetalheCaronaPageRoutingModule } from './detalhe-carona-routing.module';
 
 import { DetalheCaronaPage } from './detalhe-carona.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetalheCaronaPageRoutingModule
+    DetalheCaronaPageRoutingModule,
+    SharedModule
   ],
   declarations: [DetalheCaronaPage]
 })
