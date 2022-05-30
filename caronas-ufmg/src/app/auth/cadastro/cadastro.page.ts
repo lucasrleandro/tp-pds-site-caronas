@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,19 +16,29 @@ export class CadastroPage implements OnInit {
   formCadastro = new FormGroup({
     nome: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
-    matricula: new FormControl(null, Validators.required),
+    // matricula: new FormControl(null, Validators.required),
     motorista: new FormControl(null, Validators.required),
     passageiro: new FormControl(null, Validators.required),
     senha: new FormControl(null, Validators.required),
-    senha2: new FormControl(null, Validators.required),
+    confirmacaoSenha: new FormControl(null, Validators.required),
   });
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
   }
 
-  save() {
+  async save() {
+
+    let loading = await this.loadingCtrl.create();
+    loading.present();
+
+    try {
+      await this.usuarioService.cadastro(this.formCadastro.value).toPromise();
+
+    } finally {
+      loading.dismiss();
+    }
 
   }
 

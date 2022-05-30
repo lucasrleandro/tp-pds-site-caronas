@@ -16,14 +16,14 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.formLogin = new FormGroup({
-      matricula: new FormControl(null, Validators.compose([Validators.required])),
+      email: new FormControl(null, Validators.compose([Validators.required])),
       senha: new FormControl(null, Validators.compose([Validators.required]))
     });
 
   }
 
   login() {
-
+    console.log(this.formLogin.value);
   }
 
 
