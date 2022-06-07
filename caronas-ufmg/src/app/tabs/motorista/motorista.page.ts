@@ -9,23 +9,48 @@ import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/se
 })
 export class MotoristaPage implements OnInit {
 
-  solicitacoes: SolicitacaoPassageiro[] = [];
+  caronas: Carona[];
+  solicitacoes: SolicitacaoPassageiro[];
 
-  constructor(private caronasService: CaronasService) { }
+  user;
+
+  constructor(private caronasService: CaronasService, private authService: AuthService) { }
+
 
   ngOnInit() {
 
-    this.caronasService.solicitacoesMotorista.subscribe((solicitacoes) => {
-      if (solicitacoes) this.solicitacoes = [...solicitacoes];
+    this.authService.user.subscribe(res => {
+
+      if (!this.user && res) {
+        this.caronasService.fetchAllCaronasMotorista().subscribe();
+        this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
+      }
+
+      this.user = res;
+
     });
 
-    this.load();
+    this.caronasService.caronasMotorista.subscribe(res => {
+      if (!res) return;
+      this.caronas = [...res];
+      this.mount();
+    });
+
+    this.caronasService.solicitacoesMotorista.subscribe(res => {
+      if (!res) return;
+      this.solicitacoes = [...res];
+      this.mount();
+    });
 
   }
 
-  load(event?) {
-    this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
-    if (event) event.target.complete();
+  mount() {
+
+    if (!this.caronas || !this.solicitacoes) return;
+
+    for (let carona of this.caronas)
+      carona.solicitacoesPendentes = this.solicitacoes.filter(sol => sol.carona._id === carona._id && sol.situacao === 'PENDENTE').length;
+
   }
 
 

@@ -27,7 +27,6 @@ export class DetalheCaronaPage implements OnInit, OnDestroy {
     const caronaId = this.route.snapshot.paramMap.get('id');
 
     this.carona = this.caronasService.getCaronaMotoristaById(caronaId);
-    this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
 
     this.solicitacoesSub = this.caronasService.solicitacoesMotorista.subscribe(res => {
       if (!res) return;
