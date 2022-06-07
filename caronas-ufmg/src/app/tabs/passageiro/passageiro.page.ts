@@ -20,6 +20,7 @@ export class PassageiroPage implements OnInit {
     });
 
     this.caronasService.fetchAllCaronas().subscribe();
+    this.caronasService.fetchAllSolicitacoesPassageiro().subscribe();
 
   }
 

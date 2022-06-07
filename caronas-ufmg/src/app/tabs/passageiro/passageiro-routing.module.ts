@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PassageiroPage
   },
   {
-    path: 'detalhe-carona-passageiro',
+    path: 'detalhe-carona/:id',
     loadChildren: () => import('./detalhe-carona-passageiro/detalhe-carona-passageiro.module').then( m => m.DetalheCaronaPassageiroPageModule)
   }
 ];
