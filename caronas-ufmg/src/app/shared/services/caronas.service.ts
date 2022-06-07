@@ -101,5 +101,8 @@ export class CaronasService {
     }));
   }
 
+  criarCarona(carona: Carona) {
+    return this.http.post(environment.urlApi + '/carona', carona);
+  }
 
 }

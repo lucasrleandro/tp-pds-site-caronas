@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -28,17 +29,24 @@ export class NovaCaronaPage implements OnInit {
     preco: 0
   }
 
-  constructor() { }
+  constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
   }
 
   save() {
-
+    console.log(this.formCarona.value);
   }
 
   formValid() {
-    return true;
+    return this.formCarona.valid;
+  }
+
+  dateTimeChange(ev) {
+
+    const formatada = this.datePipe.transform(ev.detail.value, 'dd/MM/yyyy HH:mm');
+    this.formCarona.get('data').setValue(formatada);
+
   }
 
 }
