@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { User } from 'src/app/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
 export class Passageiro {
@@ -10,7 +11,7 @@ export class Passageiro {
 
 export class Carona {
   _id?: string;
-  motorista: String;
+  motorista: User;
   enderecoDestino: String;
   enderecoSaida: String;
   dataHorarioSaida: Date;
