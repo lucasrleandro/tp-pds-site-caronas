@@ -20,17 +20,17 @@ const routes: Routes = [
         loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
+        path: 'busca',
+        loadChildren: () => import('./busca/busca.module').then(m => m.BuscaPageModule)
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/passageiro',
+    redirectTo: '/tabs/busca',
     pathMatch: 'full'
-  }
+  },
+
 ];
 
 @NgModule({

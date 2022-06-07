@@ -14,12 +14,16 @@ export class LoginPage implements OnInit {
   formLogin: FormGroup;
   mostrarSenha = false;
 
-  constructor(private toastCtrl: ToastController, private platform: Platform, private loadingCtrl: LoadingController, private authService: AuthService, private navCtrl: NavController) { }
+  constructor(private platform: Platform, private loadingCtrl: LoadingController, private authService: AuthService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.formLogin = new FormGroup({
       email: new FormControl(null, Validators.compose([Validators.required])),
       senha: new FormControl(null, Validators.compose([Validators.required]))
+    });
+
+    this.authService.logged.subscribe(res => {
+      if (res) this.navCtrl.navigateRoot('/tabs/busca');
     });
 
   }

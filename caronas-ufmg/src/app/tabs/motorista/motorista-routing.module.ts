@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./nova-carona/nova-carona.module').then( m => m.NovaCaronaPageModule)
   },
   {
-    path: 'detalhe-carona',
+    path: 'detalhe-carona/:id',
     loadChildren: () => import('./detalhe-carona/detalhe-carona.module').then( m => m.DetalheCaronaPageModule)
   }
 ];

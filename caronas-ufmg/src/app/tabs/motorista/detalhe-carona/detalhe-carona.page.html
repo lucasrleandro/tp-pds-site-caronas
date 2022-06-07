@@ -23,10 +23,6 @@
           >Destino</ion-label
         >
         <ion-label class="label-caption-1 mt-16 color-gray-light-1"
-          >Rota</ion-label
-        >
-
-        <ion-label class="label-caption-1 mt-16 color-gray-light-1"
           >Horário</ion-label
         >
         <ion-label class="label-caption-1 mt-16 color-gray-light-1"
@@ -41,28 +37,32 @@
       </ion-col>
       <ion-col class="d-flex flex-column">
         <ion-label class="label-caption-1 mt-16"
-          >Centro, Belo Horizonte</ion-label
+          >{{carona.enderecoSaida}}</ion-label
         >
         <ion-label class="label-caption-1 mt-16"
-          >Instituto de Ciências Exatas...</ion-label
+          >{{carona.enderecoDestino}}</ion-label
         >
+
         <ion-label class="label-caption-1 mt-16"
-          >Afonso Pena, Antônio Carlos</ion-label
+          >{{carona.dataHorarioSaida | date: 'HH:mm'}}</ion-label
         >
-        <ion-label class="label-caption-1 mt-16">16:00</ion-label>
 
-        <ion-label class="label-caption-1 mt-16">4</ion-label>
+        <ion-label class="label-caption-1 mt-16"
+          >{{carona.vagasDisponiveis }}
+        </ion-label>
 
-        <ion-label class="label-caption-1 mt-16">Fiat Argo prata</ion-label>
-        <ion-label class="label-caption-1 mt-16">R$ 5,00</ion-label>
+        <ion-label class="label-caption-1 mt-16">{{carona.veiculo}}</ion-label>
+        <ion-label class="label-caption-1 mt-16">R$ {{carona.valor}}</ion-label>
       </ion-col>
     </ion-row>
 
     <div class="border-bottom mt-16 pb-8">
-      <h6 class="color-gray-dark">Passageiros (0/4)</h6>
+      <h6 class="color-gray-dark">
+        Solicitações ({{solicitacoes ? solicitacoes.length : ''}})
+      </h6>
     </div>
 
-    <div class="div-card active p-16 mt-16">
+    <div class="div-card active p-16 mt-16" *ngFor="let sol of solicitacoes">
       <ion-row>
         <ion-col size="3" class="px-0 d-flex justify-content-center">
           <ion-icon
@@ -73,39 +73,49 @@
         </ion-col>
         <ion-col class="d-flex flex-column justify-content-around">
           <ion-label class="label-body-2 color-gray-dark"
-            ><b>Amanda Xavier</b></ion-label
+            ><b>{{sol.passageiro.nome}}</b></ion-label
           >
-          <app-nota-estrelas [stars]="4"></app-nota-estrelas>
+          <!-- <app-nota-estrelas [stars]="4"></app-nota-estrelas> -->
 
-          <div class="d-flex justify-content-between mt-16">
-            <ion-label class="label-caption-1 color-primary">Aceitar</ion-label>
-            <ion-label class="label-caption-1 color-error">Recusar</ion-label>
-            <ion-label class="label-caption-1">Mensagem</ion-label>
+          <div
+            class="d-flex justify-content-between mt-16"
+            *ngIf="sol.situacao === 'PENDENTE'"
+          >
+            <ion-label
+              class="label-caption-1 color-primary"
+              (click)="accept(sol)"
+              >Aceitar</ion-label
+            >
+            <ion-label class="label-caption-1 color-error" (click)="dennie(sol)"
+              >Recusar</ion-label
+            >
+            <ion-label class="label-caption-1" (click)="abrirMsg()"
+              >Mensagem</ion-label
+            >
           </div>
-        </ion-col>
-      </ion-row>
-    </div>
 
-    <div class="div-card p-16 mt-16">
-      <ion-row>
-        <ion-col size="3" class="px-0 d-flex justify-content-center">
-          <ion-icon
-            name="person-circle"
-            class="icone-usuario"
-            color="primary"
-          ></ion-icon>
-        </ion-col>
-        <ion-col class="d-flex flex-column justify-content-around">
-          <ion-label class="label-body-2 color-gray-dark"
-            ><b>Gabriel Martins</b></ion-label
+          <div
+            class="d-flex justify-content-between mt-16"
+            *ngIf="sol.situacao === '1'"
           >
-          <app-nota-estrelas [stars]="4"></app-nota-estrelas>
-
-          <div class="d-flex justify-content-between mt-16">
             <ion-label class="label-caption-1 color-primary"
               >Confirmado</ion-label
             >
-            <ion-label class="label-caption-1">Mensagem</ion-label>
+            <ion-label class="label-caption-1" (click)="abrirMsg()"
+              >Mensagem</ion-label
+            >
+          </div>
+
+          <div
+            class="d-flex justify-content-between mt-16"
+            *ngIf="sol.situacao === '2'"
+          >
+            <ion-label class="label-caption-1 color-primary"
+              >Recusado</ion-label
+            >
+            <ion-label class="label-caption-1" (click)="abrirMsg()"
+              >Mensagem</ion-label
+            >
           </div>
         </ion-col>
       </ion-row>

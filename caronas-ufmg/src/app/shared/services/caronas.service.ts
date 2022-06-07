@@ -11,15 +11,10 @@ export class Passageiro {
 
 export class SolicitacaoPassageiro {
   _id: string;
-  idCarona: string;
-  idPassageiro: string;
-  situacao: StatusSolicitacao
-}
-
-export enum StatusSolicitacao {
-  Pendente = 0,
-  Aceito = 1,
-  Recusado = 2,
+  carona: Carona;
+  passageiro: User;
+  situacao: string;
+  motorista?: User;
 }
 
 export class Carona {
@@ -29,11 +24,12 @@ export class Carona {
   enderecoSaida: String;
   dataHorarioSaida: Date;
   ativa: Boolean;
-  vagasOfertadas: Number;
-  vagasDisponiveis: Number;
+  vagasOfertadas: number;
+  vagasDisponiveis: number;
   veiculo: string;
   valor: String;
   passageiros: Passageiro;
+  solicitacoesPendentes?: number; // apenas front
 }
 
 @Injectable({
@@ -41,9 +37,10 @@ export class Carona {
 })
 export class CaronasService {
 
-  private _caronas = new BehaviorSubject<Carona[]>(null); // atualiza os objetos de usuario
-  private _solicitacoesPassageiro = new BehaviorSubject<SolicitacaoPassageiro[]>(null); // atualiza os objetos de usuario
-
+  private _caronas = new BehaviorSubject<Carona[]>(null);
+  private _solicitacoesPassageiro = new BehaviorSubject<SolicitacaoPassageiro[]>(null);
+  private _caronasMotorista = new BehaviorSubject<Carona[]>(null);
+  private _solicitacoesMotorista = new BehaviorSubject<SolicitacaoPassageiro[]>(null);
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -53,6 +50,14 @@ export class CaronasService {
 
   get solicitacoesPassageiro() {
     return this._solicitacoesPassageiro.asObservable();
+  }
+
+  get caronasMotorista() {
+    return this._caronasMotorista.asObservable();
+  }
+
+  get solicitacoesMotorista() {
+    return this._solicitacoesMotorista.asObservable();
   }
 
   fetchAllCaronas() {
@@ -72,10 +77,10 @@ export class CaronasService {
 
   solicitarCarona(carona: Carona) {
     return this.http.post(environment.urlApi + '/solicitacoes-carona', {
-      idCarona: carona._id,
+      carona: carona._id,
       motorista: carona.motorista._id,
       situacao: 'PENDENTE',
-      idPassageiro: this.authService.getUserValue()._id
+      passageiro: this.authService.getUserValue()._id
     }).pipe(tap(res => {
       this.fetchAllSolicitacoesPassageiro().subscribe();
     }));
@@ -102,7 +107,45 @@ export class CaronasService {
   }
 
   criarCarona(carona: Carona) {
-    return this.http.post(environment.urlApi + '/carona', carona);
+    return this.http.post(environment.urlApi + '/carona', carona)
+      .pipe(tap(res =>
+        this.fetchAllCaronasMotorista().subscribe()
+      ));
+  }
+
+  fetchAllCaronasMotorista() {
+    return this.http.get<{ caronas: Carona[] }>(environment.urlApi + '/carona/motorista/' + this.authService.getUserValue()._id)
+      .pipe(tap(res => {
+        this._caronasMotorista.next(res.caronas);
+      }));
+  }
+
+  getCaronaMotoristaById(caronaId): Carona {
+
+    if (!this._caronasMotorista.getValue()) return null;
+    return this._caronasMotorista.getValue().find(c => c._id === caronaId);
+
+  }
+
+  fetchAllSolicitacoesMotorista() {
+
+    return this.http.get<{ solicitacoesMotorista: SolicitacaoPassageiro[] }>(environment.urlApi + '/solicitacoes-carona/motorista/' + this.authService.getUserValue()._id)
+      .pipe(tap(res => {
+        this._solicitacoesMotorista.next(res.solicitacoesMotorista);
+      }))
+
+  }
+
+  aceitarSolicitacao(idSolicitacao: string) {
+    return this.http.put(environment.urlApi + '/solicitacoes-carona/' + idSolicitacao, { situacao: 'Aceito', idSolicitacao: idSolicitacao }).pipe(tap(res => {
+      this.fetchAllSolicitacoesMotorista().subscribe();
+    }));
+  }
+
+  recusarSolicitacao(idSolicitacao: string) {
+    return this.http.put(environment.urlApi + '/solicitacoes-carona/' + idSolicitacao, { situacao: 'Recusado', idSolicitacao: idSolicitacao }).pipe(tap(res => {
+      this.fetchAllSolicitacoesMotorista().subscribe();
+    }));
   }
 
 }

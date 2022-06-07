@@ -1,6 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoadingController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth.service';
+import { CaronasService } from 'src/app/shared/services/caronas.service';
+import { ToastService } from 'src/app/shared/services/toast-service';
 
 @Component({
   selector: 'app-nova-carona',
@@ -10,32 +14,47 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NovaCaronaPage implements OnInit {
 
   formCarona = new FormGroup({
-    origem: new FormControl(null, Validators.required),
-    destino: new FormControl(null, Validators.required),
-    data: new FormControl(null, Validators.required),
-    horario: new FormControl(null, Validators.required),
-    vagas: new FormControl(null, Validators.required),
+    enderecoSaida: new FormControl(null, Validators.required),
+    enderecoDestino: new FormControl(null, Validators.required),
+    dataHorarioSaida: new FormControl(null, Validators.required),
+    dataFormatada: new FormControl(null, Validators.required),
+    vagasOfertadas: new FormControl(null, Validators.required),
     veiculo: new FormControl(null, Validators.required),
-    preco: new FormControl(null, Validators.required)
+    valor: new FormControl(null, Validators.required)
   });
 
-  carona = {
-    origem: '',
-    destino: '',
-    data: '',
-    horario: '',
-    vagas: 0,
-    veiculo: '',
-    preco: 0
-  }
 
-  constructor(private datePipe: DatePipe) { }
+  constructor(private datePipe: DatePipe, private caronaService: CaronasService, private authService: AuthService, private navCtrl: NavController, private loadingCtrl: LoadingController, private toastService: ToastService) { }
 
   ngOnInit() {
   }
 
-  save() {
-    console.log(this.formCarona.value);
+  async save() {
+
+    if (!this.formCarona.valid) return;
+
+    const loading = await this.loadingCtrl.create({ message: 'Publicando carona...' });
+    loading.present();
+
+    try {
+
+      let objForm = { ...this.formCarona.value };
+      delete objForm.dataFormatada;
+
+      objForm.ativa = true;
+      objForm.motorista = this.authService.getUserValue()._id;
+
+      objForm.vagasDisponiveis = objForm.vagasOfertadas;
+
+      await this.caronaService.criarCarona(objForm).toPromise();
+      this.toastService.makeToast('Carona publicada!');
+
+      this.navCtrl.navigateBack('/tabs/motorista');
+
+    } finally {
+      loading.dismiss();
+    }
+
   }
 
   formValid() {
@@ -45,7 +64,7 @@ export class NovaCaronaPage implements OnInit {
   dateTimeChange(ev) {
 
     const formatada = this.datePipe.transform(ev.detail.value, 'dd/MM/yyyy HH:mm');
-    this.formCarona.get('data').setValue(formatada);
+    this.formCarona.get('dataFormatada').setValue(formatada);
 
   }
 

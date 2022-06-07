@@ -120,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onLogin() {
-    this.router.navigateByUrl('/tabs/perfil');
+    //this.router.navigateByUrl('/tabs/perfil');
   }
 
   async autoLogin() {

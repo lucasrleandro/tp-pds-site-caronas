@@ -18,6 +18,8 @@ export class DetalheCaronaPassageiroPage implements OnInit {
 
   solicitacao: SolicitacaoPassageiro;
 
+  userIsDriver = false;
+
   constructor(private alertCtrl: AlertController, private authService: AuthService, private alertService: AlertService, private route: ActivatedRoute, private loadingCtrl: LoadingController, private toastService: ToastService, private caronasService: CaronasService) { }
 
   ngOnInit() {
@@ -25,11 +27,14 @@ export class DetalheCaronaPassageiroPage implements OnInit {
     const caronaId = this.route.snapshot.paramMap.get('id');
     this.carona = this.caronasService.getCaronaLocalById(caronaId);
 
+    this.userId = this.authService.getUserValue()._id;
+
     this.caronasService.solicitacoesPassageiro.subscribe(solicitacoes => {
 
-      if (!solicitacoes) return;
-      this.solicitacao = solicitacoes.find(solicitacao => solicitacao.idPassageiro === this.authService.getUserValue()._id && solicitacao.idCarona === caronaId);
+      this.userIsDriver = (this.carona.motorista._id === this.userId);
 
+      if (!solicitacoes) return;
+      this.solicitacao = solicitacoes.find(solicitacao => solicitacao.passageiro._id === this.userId && solicitacao.carona._id === caronaId);
 
     })
 

@@ -19,7 +19,7 @@
               required="true"
               maxlength="256"
               type="text"
-              formControlName="origem"
+              formControlName="enderecoSaida"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -33,7 +33,7 @@
               required="true"
               maxlength="256"
               type="text"
-              formControlName="destino"
+              formControlName="enderecoDestino"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -43,7 +43,10 @@
         <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
           <ion-item class="ion-no-padding">
             <ion-label position="floating"> Data </ion-label>
-            <ion-input [readonly]="true" formControlName="data"></ion-input>
+            <ion-input
+              [readonly]="true"
+              formControlName="dataFormatada"
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -51,7 +54,11 @@
       <ion-modal trigger="trigger-button">
         <ng-template>
           <ion-content force-overscroll="false">
-            <ion-datetime locale="pt-BR" (ionChange)="dateTimeChange($event)">
+            <ion-datetime
+              formControlName="dataHorarioSaida"
+              locale="pt-BR"
+              (ionChange)="dateTimeChange($event)"
+            >
               <ion-label slot="time-label"> Horário </ion-label>
             </ion-datetime>
           </ion-content>
@@ -61,26 +68,12 @@
       <ion-row class="my-8">
         <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
           <ion-item class="ion-no-padding">
-            <ion-label position="floating"> Horário </ion-label>
-            <ion-input
-              required="true"
-              maxlength="256"
-              type="text"
-              formControlName="horario"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="my-8">
-        <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
-          <ion-item class="ion-no-padding">
             <ion-label position="floating"> Vagas </ion-label>
             <ion-input
               required="true"
               maxlength="256"
               type="number"
-              formControlName="vagas"
+              formControlName="vagasOfertadas"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -107,7 +100,7 @@
             <ion-input
               required="true"
               type="number"
-              formControlName="preco"
+              formControlName="valor"
             ></ion-input>
           </ion-item>
         </ion-col>

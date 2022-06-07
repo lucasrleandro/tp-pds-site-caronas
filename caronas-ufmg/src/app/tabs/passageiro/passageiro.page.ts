@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Carona, CaronasService } from 'src/app/shared/services/caronas.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
 
 @Component({
   selector: 'app-passageiro',
@@ -8,15 +9,14 @@ import { Carona, CaronasService } from 'src/app/shared/services/caronas.service'
 })
 export class PassageiroPage implements OnInit {
 
-  listaCaronas: Carona[] = [];
+  solicitacoes: SolicitacaoPassageiro[] = [];
 
   constructor(private caronasService: CaronasService) { }
 
   ngOnInit() {
 
-    this.caronasService.caronas.subscribe((caronas) => {
-      if (caronas)
-        this.listaCaronas = [...caronas];
+    this.caronasService.solicitacoesPassageiro.subscribe((solicitacoes) => {
+      if (solicitacoes) this.solicitacoes = [...solicitacoes];
     });
 
     this.load();
@@ -24,12 +24,8 @@ export class PassageiroPage implements OnInit {
   }
 
   load(event?) {
-    this.caronasService.fetchAllCaronas().subscribe();
     this.caronasService.fetchAllSolicitacoesPassageiro().subscribe();
     if (event) event.target.complete();
   }
-
-
-
 
 }

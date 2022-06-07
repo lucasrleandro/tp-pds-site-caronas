@@ -73,11 +73,11 @@
       </ion-col>
     </ion-row>
 
-    <div class="border-bottom mt-16 pb-8">
+    <div class="border-bottom mt-16 pb-8" *ngIf="!userIsDriver">
       <h6 class="color-gray-dark">Solicitação</h6>
     </div>
 
-    <ion-row *ngIf="!solicitacao">
+    <ion-row *ngIf="!solicitacao && !userIsDriver">
       <ion-col>
         <ion-button
           [disabled]="carona.motorista._id === userId"
@@ -89,7 +89,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="!!solicitacao">
+    <ion-row *ngIf="!!solicitacao && !userIsDriver">
       <ion-col>
         <ion-label class="label-body-2"
           >Aguardando confirmação de {{carona.motorista.nome}}</ion-label
@@ -97,7 +97,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="!!solicitacao">
+    <ion-row *ngIf="!!solicitacao && !userIsDriver">
       <ion-col>
         <ion-button
           (click)="cancelar()"
