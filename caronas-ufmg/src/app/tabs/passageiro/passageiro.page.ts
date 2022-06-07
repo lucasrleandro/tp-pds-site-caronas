@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Carona, CaronasService } from 'src/app/shared/services/caronas.service';
 
 @Component({
   selector: 'app-passageiro',
@@ -7,21 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PassageiroPage implements OnInit {
 
-  listaCaronas = [{
-    _id: 0,
-    data: 'hoje',
-    rota: 'Centro > UFMG',
-    vagas: 2,
-    valor: 0,
-    motorista: 'Lucas Leandro'
-  }];
+  listaCaronas: Carona[] = [];
 
-  constructor() { }
+  constructor(private caronasService: CaronasService) { }
 
   ngOnInit() {
+
+    this.caronasService.caronas.subscribe((caronas) => {
+      if (caronas)
+        this.listaCaronas = [...caronas];
+    });
+
+    this.caronasService.fetchAllCaronas().subscribe();
+
   }
 
-  
+
 
 
 }

@@ -26,16 +26,22 @@
           </ion-col>
           <ion-col class="d-flex flex-column p-0 justify-content-around">
             <ion-label class="label-body-2 color-gray-dark"
-              ><b>Gabriel Martins</b></ion-label
+              ><b>{{carona.motorista}}</b></ion-label
             >
-            <ion-label class="label-caption-1">Centro > ICEX UFMG</ion-label>
+            <ion-label class="label-caption-1"
+              >{{carona.enderecoSaida}} > {{carona.enderecoDestino}}</ion-label
+            >
 
             <div class="d-flex">
-              <ion-label class="label-caption-1 mr-16">16:00</ion-label>
+              <ion-label class="label-caption-1 mr-16"
+                >{{carona.dataHorarioSaida | date: 'hh:MM'}}</ion-label
+              >
 
-              <ion-label class="label-caption-1 mr-16">4 vagas</ion-label>
+              <ion-label class="label-caption-1 mr-16"
+                >{{carona.vagasDisponiveis}}</ion-label
+              >
 
-              <ion-label class="label-caption-1">R$ 5,00</ion-label>
+              <ion-label class="label-caption-1">R$ {{carona.valor}}</ion-label>
             </div>
           </ion-col>
           <ion-col
