@@ -3,8 +3,14 @@
     <ion-title>Caronas</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-refresher (onRefresh)="load()"></ion-refresher>
 
 <ion-content>
+
+  <ion-refresher slot="fixed" color="primary" (ionRefresh)="load($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid class="p-24">
     <div class="border-bottom mt-16 pb-8">
       <h6 class="color-gray-dark">Caronas disponíveis</h6>

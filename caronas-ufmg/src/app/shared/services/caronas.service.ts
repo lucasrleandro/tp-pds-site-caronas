@@ -95,6 +95,11 @@ export class CaronasService {
     return this._solicitacoesPassageiro.getValue();
   }
 
+  cancelarSolicitacao(caronaId) {
+    return this.http.delete(environment.urlApi + '/solicitacoes-carona/' + caronaId).pipe(tap(res => {
+      this.fetchAllSolicitacoesPassageiro().subscribe();
+    }));
+  }
 
 
 }

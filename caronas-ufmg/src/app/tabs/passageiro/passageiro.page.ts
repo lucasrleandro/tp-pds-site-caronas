@@ -19,9 +19,14 @@ export class PassageiroPage implements OnInit {
         this.listaCaronas = [...caronas];
     });
 
+    this.load();
+
+  }
+
+  load(event?) {
     this.caronasService.fetchAllCaronas().subscribe();
     this.caronasService.fetchAllSolicitacoesPassageiro().subscribe();
-
+    if (event) event.target.complete();
   }
 
 

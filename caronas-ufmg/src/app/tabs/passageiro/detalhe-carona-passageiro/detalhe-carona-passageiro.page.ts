@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
 import { ToastService } from 'src/app/shared/services/toast-service';
 
@@ -12,11 +13,12 @@ import { ToastService } from 'src/app/shared/services/toast-service';
 })
 export class DetalheCaronaPassageiroPage implements OnInit {
 
-  solicitado = false;
   carona: Carona;
   userId: string;
 
-  constructor(private alertCtrl: AlertController, private authService: AuthService, private route: ActivatedRoute, private loadingCtrl: LoadingController, private toastService: ToastService, private caronasService: CaronasService) { }
+  solicitacao: SolicitacaoPassageiro;
+
+  constructor(private alertCtrl: AlertController, private authService: AuthService, private alertService: AlertService, private route: ActivatedRoute, private loadingCtrl: LoadingController, private toastService: ToastService, private caronasService: CaronasService) { }
 
   ngOnInit() {
 
@@ -26,7 +28,8 @@ export class DetalheCaronaPassageiroPage implements OnInit {
     this.caronasService.solicitacoesPassageiro.subscribe(solicitacoes => {
 
       if (!solicitacoes) return;
-      this.solicitado = !!solicitacoes.find(solicitacao => solicitacao.idPassageiro === this.authService.getUserValue()._id && solicitacao.idCarona === caronaId);
+      this.solicitacao = solicitacoes.find(solicitacao => solicitacao.idPassageiro === this.authService.getUserValue()._id && solicitacao.idCarona === caronaId);
+
 
     })
 
@@ -41,7 +44,6 @@ export class DetalheCaronaPassageiroPage implements OnInit {
     try {
 
       await this.caronasService.solicitarCarona(this.carona).toPromise();
-      this.solicitado = true;
       this.toastService.makeToast('Carona solicitada!');
 
     } catch {
@@ -52,24 +54,13 @@ export class DetalheCaronaPassageiroPage implements OnInit {
 
   async cancelar() {
 
-    let alert = await this.alertCtrl.create({
-      header: 'Cancelar carona?', message: 'Quer mesmo cancelar a carona?', buttons: [
-        {
-          text: 'Sim',
-          handler: () => {
-            this.solicitado = false;
-          }
-        },
-        {
-          text: 'Não',
-          handler: () => {
-            //
-          }
-        }
-      ]
-    });
+    const res = await this.alertService.askQuestion('Cancelar solicitação', 'Quer mesmo cancelar essa solicitação?')
 
-    alert.present();
+    if (!res) return;
+
+    await this.caronasService.cancelarSolicitacao(this.solicitacao._id).toPromise();
+    this.toastService.makeToast('Solicitação cancelada');
+
   }
 
 }
