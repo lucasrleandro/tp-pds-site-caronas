@@ -12,8 +12,12 @@
 
     <div *ngIf="user">
       <div class="w-100 d-flex mb-32 justify-content-center">
-          <ion-icon color="primary" name="person-circle" class="icone-usuario"></ion-icon>
-   </div>
+        <ion-icon
+          color="primary"
+          name="person-circle"
+          class="icone-usuario"
+        ></ion-icon>
+      </div>
 
       <form [formGroup]="formProfile" (ngSubmit)="save()" class="mt-16">
         <ion-row class="my-8">
@@ -44,20 +48,6 @@
           </ion-col>
         </ion-row>
 
-        <ion-row class="my-8">
-          <ion-col class="ion-no-padding item-input" size-sm="6" offset-sm="3">
-            <ion-item class="ion-no-padding">
-              <ion-label position="floating"> Matrícula </ion-label>
-              <ion-input
-                formControlName="matricula"
-                type="text"
-                maxlength="10"
-                inputmode="numeric"
-              >
-              </ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
 
         <ion-item class="mt-24 ion-no-padding" lines="none">
           <div class="d-flex flex-column">
@@ -72,7 +62,10 @@
             </ion-label>
           </div>
 
-          <ion-checkbox slot="start" formControlName="passageiro"></ion-checkbox>
+          <ion-checkbox
+            slot="start"
+            formControlName="ePassageiro"
+          ></ion-checkbox>
         </ion-item>
 
         <ion-item class="mt-16 ion-no-padding" lines="none">
@@ -88,7 +81,7 @@
             </ion-label>
           </div>
 
-          <ion-checkbox slot="start" formControlName="motorista"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="eMotorista"></ion-checkbox>
         </ion-item>
 
         <ion-row class="d-flex justify-content-center mt-32">
@@ -98,6 +91,17 @@
             class="action-button w-100"
           >
             Salvar
+          </ion-button>
+        </ion-row>
+
+        <ion-row class="d-flex justify-content-center mt-16" (click)="logout()">
+          <ion-button
+            type="button"
+            color="danger"
+            fill="clear"
+            class="action-button w-100"
+          >
+            Sair
           </ion-button>
         </ion-row>
       </form>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotaEstrelasComponent } from './nota-estrelas/nota-estrelas.component';
+import { NotaEstrelasComponent } from './components/nota-estrelas/nota-estrelas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 

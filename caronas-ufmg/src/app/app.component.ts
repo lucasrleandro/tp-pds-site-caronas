@@ -1,10 +1,138 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { Platform, NavController, LoadingController } from '@ionic/angular';
+
+import { Router } from '@angular/router';
+import { AuthService, User } from './auth/auth.service';
+import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { NetworkService } from './shared/services/network.service';
+import { ToastService } from './shared/services/toast-service';
+import { PluginListenerHandle } from '@capacitor/core';
+import { ConnectionStatus, Network } from '@capacitor/network';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { AlertService } from './shared/services/alert.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  constructor() {}
+export class AppComponent implements OnInit, OnDestroy {
+
+  networkStatus: ConnectionStatus;
+  networkListener: PluginListenerHandle;
+
+  showTabs = true;
+
+  deepLinksTrying = 0;
+
+  authSub: Subscription;
+  pushRegistered = false;
+
+  wasLogged = false;
+
+  _user: User;
+
+  emailToVerify = null;
+  openNotifications = false;
+
+
+  constructor(
+    private platform: Platform,
+    private http: HttpClient,
+    private authService: AuthService,
+    private navController: NavController,
+    private router: Router,
+    private networkService: NetworkService,
+    private toastService: ToastService,
+    private alertService: AlertService,
+    private loadingCtrl: LoadingController) {
+
+  }
+
+  async getStatus() {
+    this.networkStatus = await Network.getStatus();
+    if (!this.networkStatus.connected) {
+      this.toastService.makeToastInternet(false);
+    }
+  }
+
+
+  startNetwork() {
+    this.networkListener = Network.addListener(
+      'networkStatusChange',
+      (status) => {
+
+        if ((!this.networkStatus.connected && status.connected) || !status.connected)
+          this.toastService.makeToastInternet(status.connected);
+
+        this.networkStatus = status;
+
+        if (!status.connected)
+          this.networkService.netStatusChange(status);
+
+      }
+    );
+  }
+
+
+  ngOnInit() {
+
+    this.start();
+
+    this.platform.ready().then(() => {
+
+      if (this.platform.is('mobile') && this.platform.is('hybrid'))
+        SplashScreen.hide();
+
+    });
+
+    this.authSub = this.authService.logged.subscribe((logged) => {
+
+      if (!logged && this.wasLogged)
+        this.onLogout();
+
+      if (logged)
+        this.onLogin();
+
+      this.wasLogged = logged;
+
+    });
+
+    if (this.platform.is('mobile') && this.platform.is('hybrid')) {
+
+      StatusBar.setOverlaysWebView({ overlay: false });
+      StatusBar.setStyle({ style: Style.Light });
+      StatusBar.setBackgroundColor({ color: '#FFFFFF' });
+
+    }
+
+  }
+
+  async start() {
+    this.startNetwork();
+    this.getStatus();
+    this.autoLogin();
+  }
+
+  onLogout() {
+    this.navController.navigateRoot('/');
+  }
+
+  onLogin() {
+    this.router.navigateByUrl('/tabs/perfil');
+  }
+
+  async autoLogin() {
+    await this.authService.autoLogin().toPromise();
+  }
+
+
+  ngOnDestroy() {
+    this.networkListener.remove();
+
+    if (this.authSub)
+      this.authSub.unsubscribe();
+  }
+
 }
