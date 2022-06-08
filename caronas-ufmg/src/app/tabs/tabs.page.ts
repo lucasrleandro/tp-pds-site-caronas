@@ -19,7 +19,7 @@ export class TabsPage implements OnInit {
 
     this.caronasService.solicitacoesMotorista.subscribe(res => {
       if (!res) return;
-      this.motoristaPendentes = res.filter(el => el.situacao === '0').length;
+      this.motoristaPendentes = res.filter(el => el.situacao === '0' || el.situacao === 'PENDENTE').length;
     });
 
   }

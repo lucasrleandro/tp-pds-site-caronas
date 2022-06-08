@@ -12,7 +12,10 @@
 
     <ion-tab-button tab="motorista">
       <ion-icon name="car"></ion-icon>
-      <ion-label>Motorista</ion-label>
+      <ion-label
+        >Motorista
+        <div class="badge" *ngIf="motoristaPendentes"></div>
+      </ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="perfil">

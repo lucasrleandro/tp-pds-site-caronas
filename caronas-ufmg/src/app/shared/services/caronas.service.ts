@@ -87,7 +87,7 @@ export class CaronasService {
     return this.http.post(environment.urlApi + '/solicitacoes-carona', {
       carona: carona._id,
       motorista: carona.motorista._id,
-      situacao: 'PENDENTE',
+      situacao: '0',
       passageiro: this.authService.getUserValue()._id
     }).pipe(tap(res => {
       this.fetchAllSolicitacoesPassageiro().subscribe();
@@ -146,12 +146,14 @@ export class CaronasService {
 
   aceitarSolicitacao(idSolicitacao: string) {
     return this.http.put(environment.urlApi + '/solicitacoes-carona/' + idSolicitacao, { situacao: 'Aceito', idSolicitacao: idSolicitacao }).pipe(tap(res => {
+      this.fetchAllCaronasMotorista().subscribe();
       this.fetchAllSolicitacoesMotorista().subscribe();
     }));
   }
 
   recusarSolicitacao(idSolicitacao: string) {
     return this.http.put(environment.urlApi + '/solicitacoes-carona/' + idSolicitacao, { situacao: 'Recusado', idSolicitacao: idSolicitacao }).pipe(tap(res => {
+      this.fetchAllCaronasMotorista().subscribe();
       this.fetchAllSolicitacoesMotorista().subscribe();
     }));
   }

@@ -57,7 +57,7 @@ export class DetalheCaronaPage implements OnInit, OnDestroy {
     const proceed = await this.alertService.askQuestion('Atenção', `Recusar carona para ${solicitacao.passageiro.nome.split(' ')[0]}?`);
     if (!proceed) return;
 
-    await this.caronasService.aceitarSolicitacao(solicitacao._id).toPromise();
+    await this.caronasService.recusarSolicitacao(solicitacao._id).toPromise();
     this.toastService.makeToast('Solicitação recusada!');
   }
 

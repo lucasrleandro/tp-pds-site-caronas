@@ -34,7 +34,7 @@ export class MotoristaPage implements OnInit {
     if (!this.caronas || !this.solicitacoes) return;
 
     for (let carona of this.caronas)
-      carona.solicitacoesPendentes = this.solicitacoes.filter(sol => sol.carona._id === carona._id && sol.situacao === '0').length;
+      carona.solicitacoesPendentes = this.solicitacoes.filter(sol => sol.carona._id === carona._id && (sol.situacao === '0' || sol.situacao === 'PENDENTE')).length;
 
   }
 

@@ -4,3 +4,12 @@ ion-label {
 ion-icon {
   font-size: 2.2rem;
 }
+.badge {
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--ion-color-primary);
+  position: absolute;
+  border-radius: 100%;
+  right: 0.8rem;
+  top: 1.6rem;
+}
