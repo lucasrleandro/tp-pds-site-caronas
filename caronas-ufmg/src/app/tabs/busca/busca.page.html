@@ -10,9 +10,6 @@
   </ion-refresher>
 
   <ion-grid class="p-24">
-    <div class="border-bottom mt-16 pb-8">
-      <h6 class="color-gray-dark">Caronas disponíveis</h6>
-    </div>
 
     <div *ngIf="listaCaronas">
       <div
@@ -40,11 +37,11 @@
 
             <div class="d-flex">
               <ion-label class="label-caption-1 mr-16"
-                >{{carona.dataHorarioSaida | date: 'hh:MM'}}</ion-label
+                >{{carona.dataHorarioSaida | date: 'HH:mm'}}</ion-label
               >
 
               <ion-label class="label-caption-1 mr-16"
-                >{{carona.vagasDisponiveis}}</ion-label
+                >{{carona.vagasDisponiveis}} vagas</ion-label
               >
 
               <ion-label class="label-caption-1">R$ {{carona.valor}}</ion-label>

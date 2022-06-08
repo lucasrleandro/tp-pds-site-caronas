@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar mode="ios">
-    <ion-title>Caronas</ion-title>
+    <ion-title>Minhas caronas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,10 +10,6 @@
   </ion-refresher>
 
   <ion-grid class="p-24">
-    <div class="border-bottom mt-16 pb-8">
-      <h6 class="color-gray-dark">Próximas caronas</h6>
-    </div>
-
     <div *ngIf="solicitacoes">
       <div
         class="div-card p-20 mt-16 ion-activatable ripple-parent"
@@ -35,19 +31,22 @@
               ></ion-label
             >
             <ion-label class="label-caption-1"
-              >{{sol.carona.enderecoSaida}} > {{sol.carona.enderecoDestino}}</ion-label
+              >{{sol.carona.enderecoSaida}} >
+              {{sol.carona.enderecoDestino}}</ion-label
             >
 
             <div class="d-flex">
               <ion-label class="label-caption-1 mr-16"
-                >{{sol.carona.dataHorarioSaida | date: 'hh:MM'}}</ion-label
+                >{{sol.carona.dataHorarioSaida | date: 'HH:mm'}}</ion-label
               >
 
               <ion-label class="label-caption-1 mr-16"
-                >{{sol.carona.vagasDisponiveis}}</ion-label
+                >{{sol.carona.vagasDisponiveis}} vagas</ion-label
               >
 
-              <ion-label class="label-caption-1">R$ {{sol.carona.valor}}</ion-label>
+              <ion-label class="label-caption-1"
+                >R$ {{sol.carona.valor}}</ion-label
+              >
             </div>
           </ion-col>
           <ion-col
