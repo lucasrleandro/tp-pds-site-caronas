@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
     try {
 
       await this.authService.login(this.formLogin.get('email').value, this.formLogin.get("senha").value).toPromise();
-      this.navCtrl.navigateRoot('/tabs/perfil');
+      this.navCtrl.navigateRoot('/tabs/busca');
       this.formLogin.reset();
 
     } finally {

@@ -41,9 +41,10 @@ export class DetalheCaronaPassageiroPage implements OnInit {
   }
 
   async solicitar() {
-    // let alert = await this.alertCtrl.create({ header: 'Carona solicitada!', message: 'Agora é só aguardar a resposta de Lucas.', buttons: ['Entendi'] });
-    // alert.present();
-    // this.solicitado = true;
+
+    const proceed = await this.alertService.askQuestion('Atenção', `Solicitar essa carona?`);
+    if (!proceed) return;
+
     let loading = await this.loadingCtrl.create({ message: 'Enviando solicitação' });;
 
     try {
