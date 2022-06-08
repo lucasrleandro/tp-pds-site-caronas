@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
+import { Carona, CaronasService, SolicitacaoMotorista, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
 
 @Component({
   selector: 'app-motorista',
@@ -10,7 +10,7 @@ import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/se
 export class MotoristaPage implements OnInit {
 
   caronas: Carona[];
-  solicitacoes: SolicitacaoPassageiro[];
+  solicitacoes: SolicitacaoMotorista[];
 
   user;
 
@@ -22,8 +22,7 @@ export class MotoristaPage implements OnInit {
     this.authService.user.subscribe(res => {
 
       if (!this.user && res) {
-        this.caronasService.fetchAllCaronasMotorista().subscribe();
-        this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
+        this.load()
       }
 
       this.user = res;
@@ -49,9 +48,14 @@ export class MotoristaPage implements OnInit {
     if (!this.caronas || !this.solicitacoes) return;
 
     for (let carona of this.caronas)
-      carona.solicitacoesPendentes = this.solicitacoes.filter(sol => sol.carona._id === carona._id && sol.situacao === 'PENDENTE').length;
+      carona.solicitacoesPendentes = this.solicitacoes.filter(sol => sol.carona._id === carona._id && sol.situacao === '0').length;
 
   }
 
+  load(ev?) {
+    this.caronasService.fetchAllCaronasMotorista().subscribe();
+    this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
+    if (ev) ev.target.complete();
+  }
 
 }

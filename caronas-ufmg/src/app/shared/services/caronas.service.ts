@@ -12,9 +12,17 @@ export class Passageiro {
 export class SolicitacaoPassageiro {
   _id: string;
   carona: Carona;
-  passageiro: User;
+  passageiro: string;
   situacao: string;
   motorista?: User;
+}
+
+export class SolicitacaoMotorista {
+  _id: string;
+  carona: Carona;
+  passageiro: User;
+  situacao: string;
+  motorista?: string;
 }
 
 export class Carona {
@@ -40,7 +48,7 @@ export class CaronasService {
   private _caronas = new BehaviorSubject<Carona[]>(null);
   private _solicitacoesPassageiro = new BehaviorSubject<SolicitacaoPassageiro[]>(null);
   private _caronasMotorista = new BehaviorSubject<Carona[]>(null);
-  private _solicitacoesMotorista = new BehaviorSubject<SolicitacaoPassageiro[]>(null);
+  private _solicitacoesMotorista = new BehaviorSubject<SolicitacaoMotorista[]>(null);
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -129,7 +137,7 @@ export class CaronasService {
 
   fetchAllSolicitacoesMotorista() {
 
-    return this.http.get<{ solicitacoesMotorista: SolicitacaoPassageiro[] }>(environment.urlApi + '/solicitacoes-carona/motorista/' + this.authService.getUserValue()._id)
+    return this.http.get<{ solicitacoesMotorista: SolicitacaoMotorista[] }>(environment.urlApi + '/solicitacoes-carona/motorista/' + this.authService.getUserValue()._id)
       .pipe(tap(res => {
         this._solicitacoesMotorista.next(res.solicitacoesMotorista);
       }))

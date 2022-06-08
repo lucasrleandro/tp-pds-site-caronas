@@ -34,7 +34,7 @@ export class DetalheCaronaPassageiroPage implements OnInit {
       this.userIsDriver = (this.carona.motorista._id === this.userId);
 
       if (!solicitacoes) return;
-      this.solicitacao = solicitacoes.find(solicitacao => solicitacao.passageiro._id === this.userId && solicitacao.carona._id === caronaId);
+      this.solicitacao = solicitacoes.find(solicitacao => solicitacao.passageiro === this.userId && solicitacao.carona._id === caronaId);
 
     })
 

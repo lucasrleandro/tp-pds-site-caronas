@@ -5,12 +5,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" color="primary" (ionRefresh)="load($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid class="p-24">
-    <div *ngIf="!solicitacoes" class="w-100 d-flex justify-content-center">
+    <div *ngIf="!caronas" class="w-100 d-flex justify-content-center">
       <ion-spinner></ion-spinner>
     </div>
 
-    <div *ngIf="solicitacoes">
+    <div *ngIf="caronas">
       <div
         class="div-card p-20 mb-16 ion-activatable ripple-parent"
         *ngFor="let carona of caronas"

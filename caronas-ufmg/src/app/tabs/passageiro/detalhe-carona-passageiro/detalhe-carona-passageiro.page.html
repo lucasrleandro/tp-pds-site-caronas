@@ -92,7 +92,8 @@
     <ion-row *ngIf="!!solicitacao && !userIsDriver">
       <ion-col>
         <ion-label class="label-body-2"
-          >Aguardando confirmação de {{carona.motorista.nome}}</ion-label
+          >Aguardando confirmação de {{carona.motorista.nome.split('
+          ')[0]}}</ion-label
         >
       </ion-col>
     </ion-row>

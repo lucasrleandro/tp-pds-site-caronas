@@ -4,7 +4,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { Carona, CaronasService, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
+import { Carona, CaronasService, SolicitacaoMotorista, SolicitacaoPassageiro } from 'src/app/shared/services/caronas.service';
 import { ToastService } from 'src/app/shared/services/toast-service';
 
 @Component({
@@ -17,7 +17,7 @@ export class DetalheCaronaPage implements OnInit, OnDestroy {
   carona: Carona;
   userId: string;
 
-  solicitacoes: SolicitacaoPassageiro[];
+  solicitacoes: SolicitacaoMotorista[];
   solicitacoesSub: Subscription;
 
   constructor(private alertCtrl: AlertController, private authService: AuthService, private alertService: AlertService, private route: ActivatedRoute, private loadingCtrl: LoadingController, private toastService: ToastService, private caronasService: CaronasService) { }
@@ -44,12 +44,12 @@ export class DetalheCaronaPage implements OnInit, OnDestroy {
     this.toastService.makeToast('Em desenvolvimento');
   }
 
-  async accept(solicitacao: SolicitacaoPassageiro) {
+  async accept(solicitacao: SolicitacaoMotorista) {
     await this.caronasService.aceitarSolicitacao(solicitacao._id).toPromise();
     this.toastService.makeToast('Solicitação aceita!');
   }
 
-  async dennie(solicitacao) {
+  async dennie(solicitacao: SolicitacaoMotorista) {
     await this.caronasService.aceitarSolicitacao(solicitacao._id).toPromise();
     this.toastService.makeToast('Solicitação recusada!');
   }
