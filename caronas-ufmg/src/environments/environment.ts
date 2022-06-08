@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://localhost:8080'
+  urlApi: 'http://54.232.78.4:3000'
   // urlApi: 'https://3350-150-164-253-79.ngrok.io'
 };
 
