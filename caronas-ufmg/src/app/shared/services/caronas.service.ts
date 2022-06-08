@@ -156,4 +156,11 @@ export class CaronasService {
     }));
   }
 
+  reset() {
+    this._caronas.next(null);
+    this._caronasMotorista.next(null);
+    this._solicitacoesMotorista.next(null);
+    this._solicitacoesPassageiro.next(null);
+  }
+
 }

@@ -8,18 +8,15 @@ import { Carona, CaronasService } from 'src/app/shared/services/caronas.service'
 })
 export class BuscaPage implements OnInit {
 
-  listaCaronas: Carona[] = [];
+  listaCaronas: Carona[];
 
   constructor(private caronasService: CaronasService) { }
 
   ngOnInit() {
 
     this.caronasService.caronas.subscribe((caronas) => {
-      if (caronas)
-        this.listaCaronas = [...caronas];
+      this.listaCaronas = caronas;
     });
-
-    this.load();
 
   }
 

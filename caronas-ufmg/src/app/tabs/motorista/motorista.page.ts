@@ -12,32 +12,18 @@ export class MotoristaPage implements OnInit {
   caronas: Carona[];
   solicitacoes: SolicitacaoMotorista[];
 
-  user;
-
   constructor(private caronasService: CaronasService, private authService: AuthService) { }
 
 
   ngOnInit() {
 
-    this.authService.user.subscribe(res => {
-
-      if (!this.user && res) {
-        this.load()
-      }
-
-      this.user = res;
-
-    });
-
     this.caronasService.caronasMotorista.subscribe(res => {
-      if (!res) return;
-      this.caronas = [...res];
+      this.caronas = res;
       this.mount();
     });
 
     this.caronasService.solicitacoesMotorista.subscribe(res => {
-      if (!res) return;
-      this.solicitacoes = [...res];
+      this.solicitacoes = res;
       this.mount();
     });
 

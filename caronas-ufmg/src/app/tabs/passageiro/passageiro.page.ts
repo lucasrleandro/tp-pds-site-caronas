@@ -16,10 +16,8 @@ export class PassageiroPage implements OnInit {
   ngOnInit() {
 
     this.caronasService.solicitacoesPassageiro.subscribe((solicitacoes) => {
-      if (solicitacoes) this.solicitacoes = [...solicitacoes];
+      this.solicitacoes = solicitacoes;
     });
-
-    this.load();
 
   }
 

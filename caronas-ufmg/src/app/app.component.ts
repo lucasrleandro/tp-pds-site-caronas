@@ -13,6 +13,7 @@ import { ConnectionStatus, Network } from '@capacitor/network';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { AlertService } from './shared/services/alert.service';
+import { CaronasService } from './shared/services/caronas.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -39,14 +40,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private platform: Platform,
-    private http: HttpClient,
     private authService: AuthService,
     private navController: NavController,
-    private router: Router,
     private networkService: NetworkService,
     private toastService: ToastService,
-    private alertService: AlertService,
-    private loadingCtrl: LoadingController) {
+    private caronasService: CaronasService,
+  ) {
 
   }
 
@@ -117,10 +116,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.navController.navigateRoot('/');
+    this.caronasService.reset();
   }
 
   onLogin() {
-    //this.router.navigateByUrl('/tabs/perfil');
+
+    this.caronasService.fetchAllCaronas().subscribe();
+    this.caronasService.fetchAllCaronasMotorista().subscribe();
+    this.caronasService.fetchAllSolicitacoesMotorista().subscribe();
+    this.caronasService.fetchAllSolicitacoesPassageiro().subscribe();
+
   }
 
   async autoLogin() {
